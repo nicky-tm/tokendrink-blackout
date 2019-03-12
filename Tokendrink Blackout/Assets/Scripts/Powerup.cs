@@ -9,12 +9,21 @@ public class Powerup : MonoBehaviour
 
     public Text type;
     string Type = "type";
+
     public Text year;
     string Year = "S18";
+
+    public Text succeed;
+    string Succeed = "S18";
+
+    public Text defeat;
+    string Defeat = "S18";
+
     public Text beer;
     public Text bigBeer;
     public int BeerCurrent = 7;
     public int BeerGoal = 29;
+
     public Text soda;
     public Text bigSoda;
     public int SodaCurrent = 15;
@@ -34,7 +43,7 @@ public class Powerup : MonoBehaviour
     public Image bigBeerMug;
     public Image bigSodaGlass;
 
-    public Transform smallBeerTransform, bigBeerTransform, smallSodaTransform, bigSodaTransform, typeTransform, timeProgressTransform;
+    public Transform smallBeerTransform, bigBeerTransform, smallSodaTransform, bigSodaTransform, typeTransform, timeProgressTransform, succeedTransform, defeatTransform;
 
     
 
@@ -86,11 +95,17 @@ public class Powerup : MonoBehaviour
 
         typeTransform.gameObject.SetActive(true);
         timeProgressTransform.gameObject.SetActive(true);
+        succeedTransform.gameObject.SetActive(false);
+        defeatTransform.gameObject.SetActive(false);
 
         if(sourceGen == 0){
             this.Year = "OLD";
+            this.Succeed = "OLD";
+            this.Defeat = "OLD";
         } else{
             this.Year = "S" + sourceGen.ToString().Substring(2);
+            this.Succeed = "S" + sourceGen.ToString().Substring(2);
+            this.Defeat = "S" + sourceGen.ToString().Substring(2);
         }
 
         if (BeerGoal == 0) {
@@ -117,6 +132,12 @@ public class Powerup : MonoBehaviour
         bigBeerTransform.gameObject.SetActive(false);
         smallSodaTransform.gameObject.SetActive(false);
         smallBeerTransform.gameObject.SetActive(false);
+
+        // if (SUCCEEDED) {
+        //     succeedTransform.gameObject.SetActive(true);
+        // } else {
+        //     defeatTransform.gameObject.SetActive(true);
+        // }
 
         eventStarted = false;
     }

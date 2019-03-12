@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class Timer : MonoBehaviour
 {
@@ -22,8 +23,8 @@ public class Timer : MonoBehaviour
 
         if (timeLeftSec <= 0) {
             StopCoroutine("countdown");
-            countdownSec.text = "";
-            countdownMill.text = "";
+            countdownSec.text = "00";
+            countdownMill.text = "00";
         }
     }
 

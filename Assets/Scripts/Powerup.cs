@@ -209,7 +209,8 @@ public class Powerup : MonoBehaviour
         Succeed.SetActive(false);
         Defeat.SetActive(false);
 
-
+        Succeed.transform.GetChild(1).GetComponent<Text>().text = SucceedString;
+        Defeat.transform.GetChild(1).GetComponent<Text>().text = DefeatString;
 
         GameManager.PowerupEvent -= StartEvent;
         GameManager.PowerupEvent += StartEvent;
@@ -234,16 +235,19 @@ public class Powerup : MonoBehaviour
             typeActivated.text = (TypeActivated);
             typeFailed.text = (TypeFailed);
 
+            Succeed.transform.GetChild(1).GetComponent<Text>().text = SucceedString;
+            Defeat.transform.GetChild(1).GetComponent<Text>().text = DefeatString;
+
             loadBeer = (float)BeerCurrent / (float)BeerGoal;
             loadSoda = (float)SodaCurrent / (float)SodaGoal;
 
             this.timeLeft -= Time.deltaTime;
 
             time.fillAmount = timeLeft / timeMax;
-            SmallBeer.GetComponent<Image>().fillAmount = (loadBeer);
-            BigBeer.GetComponent<Image>().fillAmount = (loadBeer);
-            SmallSoda.GetComponent<Image>().fillAmount = (loadSoda);
-            BigSoda.GetComponent<Image>().fillAmount = (loadSoda);
+            SmallBeer.transform.GetChild(0).GetComponent<Image>().fillAmount = (loadBeer);
+            BigBeer.transform.GetChild(0).GetComponent<Image>().fillAmount = (loadBeer);
+            SmallSoda.transform.GetChild(0).GetComponent<Image>().fillAmount = (loadSoda);
+            BigSoda.transform.GetChild(0).GetComponent<Image>().fillAmount = (loadSoda);
         }
     }
 
@@ -267,9 +271,11 @@ public class Powerup : MonoBehaviour
             this.Year = "OLD";
             this.SucceedString = "OLD";
             this.DefeatString = "OLD";
-        } else{
+            Debug.Log(SucceedString);
+        } else {
             this.Year = "S" + sourceGen.ToString().Substring(2);
             this.SucceedString = "S" + sourceGen.ToString().Substring(2);
+            Debug.Log(SucceedString);
             this.DefeatString = "S" + sourceGen.ToString().Substring(2);
         }
 

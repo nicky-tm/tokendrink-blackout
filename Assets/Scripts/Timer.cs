@@ -13,7 +13,11 @@ public class Timer : MonoBehaviour
     public Text countdownMill;
     float countdownTime = 60.00f;
     string time;
-    
+
+    private void OnEnable () {
+        countdownTime = timeLeftSec;
+    }
+
     void Update()
     {
         if (countdownTime <= 0)

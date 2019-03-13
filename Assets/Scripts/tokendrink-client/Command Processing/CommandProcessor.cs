@@ -33,8 +33,17 @@ public static class CommandProcessor
             case "trigger":
                 ProcessData(ToDataType<GameTriggerData>(JSON));
                 break;
+            case "round_winner":
+                ProcessData(ToDataType<GameWinnerData>(JSON));
+                break;
             case "winner":
                 ProcessData(ToDataType<GameWinnerData>(JSON));
+                break;
+            case "blackout":
+                ProcessData(ToDataType<BlackoutData>(JSON));
+                break;
+            case "play_sound":
+                ProcessData(ToDataType<PlayAudioData>(JSON));
                 break;
             default:
                 Debug.LogError("Couldn't process type: " + commonData.type);
@@ -85,9 +94,28 @@ public static class CommandProcessor
             {
                 GameManager.TriggerEvent(gameTriggerData.value);
             });
-        } else if (data is MemberCountData memberCountData) {
+        }
+        else if (data is GameWinnerData gameWinnerData){
             ThreadHelper.ExecuteInUpdate(() => {
+                GameManager.AudioEvent(gameWinnerData.value.ToString());
+            });
+        }
+        else if (data is MemberCountData memberCountData)
+        {
+            ThreadHelper.ExecuteInUpdate(() =>
+            {
                 GameManager.CountEvent(memberCountData.value);
+            });
+        } else if (data is BlackoutData blackoutData) {
+            ThreadHelper.ExecuteInUpdate(() => {
+                GameManager.AudioEvent(blackoutData.value.ToString());
+            });
+        }
+        else if (data is PlayAudioData playAudioData)
+        {
+            ThreadHelper.ExecuteInUpdate(() =>
+            {
+                GameManager.AudioEvent(playAudioData.value);
             });
         }
         else

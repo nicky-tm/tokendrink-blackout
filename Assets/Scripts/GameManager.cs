@@ -6,6 +6,7 @@ public static class GameManager {
 
     static Card[] cards = new Card[6];
     public static List<Card> playerPositions = new List<Card>();
+    public static string round = "empty";
 
     public delegate void powerupEvent(string powerup, int sourceGen, int targetGen, int timeGoal, int beerGoal, int sodaGoal);
     public static event powerupEvent PowerupEvent;
@@ -25,6 +26,9 @@ public static class GameManager {
     public delegate void memberCount(int value);
     public static event memberCount MemberCount;
 
+    public delegate void playAudio(string value);
+    public static event playAudio PlayAudio;
+
     static float highestSpeed;
     public static float HighestSpeed {get{
         if (highestSpeed <= 0) return 1f;
@@ -36,6 +40,10 @@ public static class GameManager {
 
         playerPositions.Clear();
         playerPositions.AddRange(cards);
+    }
+
+    public static void SetRound(string value){
+        round = value;
     }
 
     public static void SetProgress(int generation, float progress){
@@ -173,6 +181,7 @@ public static class GameManager {
 
     public static void LoadData(string value){
         LoadingData(value);
+        round = value;
     }
 
     public static void FinalEvent(bool completed) {
@@ -181,10 +190,18 @@ public static class GameManager {
 
     public static void TriggerEvent(string value) {
         TriggerContinent(value);
+
+        if (round == "europe"){
+            PlayAudio("startEurope");
+        }
     }
 
     public static void CountEvent(int value) {
         MemberCount(value);
+    }
+
+    public static void AudioEvent(string value) {
+        PlayAudio(value);
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SerializeField]
-public class GameWinnerData : MonoBehaviour {
+public class GameWinnerData {
 
     // winner
     public string type;

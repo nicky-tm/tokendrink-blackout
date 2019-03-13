@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Default.unity
-    guid: f1cb69b731d49ad46b4650e6fc2cb6d0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Countdown.unity
     guid: 3361b687d527cfd48946e35712dba432

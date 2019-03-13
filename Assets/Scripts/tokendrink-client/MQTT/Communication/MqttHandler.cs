@@ -27,7 +27,7 @@ public class MqttHandler : MonoBehaviour {
         string clientId = Guid.NewGuid().ToString();
         client.Connect(clientId);
 
-        client.Subscribe(new string[] { "stats", "powerup", "game" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+        client.Subscribe(new string[] { "stats", "powerup", "game", "play_sound", "member_count", "blackout" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE  });
     }
 
     public void Publish (string topic, string msg) {

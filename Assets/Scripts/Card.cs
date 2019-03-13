@@ -14,20 +14,22 @@ public class Card : MonoBehaviour {
     public float speed;
 
 
-    private void Awake(){
-        CardPositions.AddPosition(index, transform.position);
+    private void Start(){
+        CardPositions.AddPosition(index, transform.localPosition);
         GameManager.AddCard(index, this);
 
         wifi = GetComponentInChildren<WifiFill>();
         
-        targetPosition = transform.position;
+        targetPosition = transform.localPosition;
     }
-    private void LateUpdate(){
+    private void Update(){
         targetPosition = GameManager.GetTargetPosition(generation);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, moveSpeed);
 
         float scaledSpeed = speed / GameManager.HighestSpeed;
         wifi.value = Mathf.Clamp01(scaledSpeed);
+
+        Debug.Log(GameManager.playerPositions.Count);
     }
 
 }

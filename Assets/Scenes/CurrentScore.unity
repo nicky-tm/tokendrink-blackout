@@ -503,11 +503,11 @@ GameObject:
   - component: {fileID: 96885131}
   m_Layer: 5
   m_Name: Soda big
-  m_TagString: Untagged
+  m_TagString: bigsoda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &96885130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 85337f9a282e9d34380a4b1019403997, type: 3}
-  m_Type: 3
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
@@ -2470,11 +2470,11 @@ GameObject:
   - component: {fileID: 830791346}
   m_Layer: 5
   m_Name: Beer
-  m_TagString: Untagged
+  m_TagString: beer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &830791345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2517,7 +2517,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: d99c83a5817c1cc469ce325ed00a0d94, type: 3}
-  m_Type: 3
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3430,11 +3430,11 @@ GameObject:
   - component: {fileID: 1174438339}
   m_Layer: 5
   m_Name: Soda
-  m_TagString: Untagged
+  m_TagString: soda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1174438338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4032,18 +4032,6 @@ MonoBehaviour:
   SodaGoal: 17
   time: {fileID: 672874173}
   timeLeft: 120
-  beerMug: {fileID: 198069212}
-  sodaGlass: {fileID: 1976671585}
-  bigBeerMug: {fileID: 975372082}
-  bigSodaGlass: {fileID: 394752493}
-  smallBeerTransform: {fileID: 830791345}
-  bigBeerTransform: {fileID: 1947064550}
-  smallSodaTransform: {fileID: 1174438338}
-  bigSodaTransform: {fileID: 96885130}
-  typeTransform: {fileID: 1603306202}
-  timeProgressTransform: {fileID: 2075602337}
-  succeedTransform: {fileID: 1577402037}
-  defeatTransform: {fileID: 1824136345}
 --- !u!1 &1476861179
 GameObject:
   m_ObjectHideFlags: 0
@@ -4313,11 +4301,11 @@ GameObject:
   - component: {fileID: 1577402037}
   m_Layer: 0
   m_Name: Succeed
-  m_TagString: Untagged
+  m_TagString: succeed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1577402037
 Transform:
   m_ObjectHideFlags: 0
@@ -4348,11 +4336,11 @@ GameObject:
   - component: {fileID: 1603306203}
   m_Layer: 5
   m_Name: Type
-  m_TagString: Untagged
+  m_TagString: type
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1603306202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4629,11 +4617,11 @@ GameObject:
   - component: {fileID: 1824136345}
   m_Layer: 0
   m_Name: Defeat
-  m_TagString: Untagged
+  m_TagString: defeat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1824136345
 Transform:
   m_ObjectHideFlags: 0
@@ -4893,11 +4881,11 @@ GameObject:
   - component: {fileID: 1947064551}
   m_Layer: 5
   m_Name: Beer big
-  m_TagString: Untagged
+  m_TagString: bigbeer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1947064550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4940,7 +4928,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: d99c83a5817c1cc469ce325ed00a0d94, type: 3}
-  m_Type: 3
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
@@ -5297,11 +5285,11 @@ GameObject:
   - component: {fileID: 2075602338}
   m_Layer: 5
   m_Name: Time progress
-  m_TagString: Untagged
+  m_TagString: time
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2075602337
 RectTransform:
   m_ObjectHideFlags: 0

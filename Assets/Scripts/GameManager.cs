@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameManager {
 
     static Card[] cards = new Card[6];
-    static List<Card> playerPositions = new List<Card>();
+    public static List<Card> playerPositions = new List<Card>();
 
     public delegate void powerupEvent(string powerup, int sourceGen, int targetGen, int timeGoal, int beerGoal, int sodaGoal);
     public static event powerupEvent PowerupEvent;
@@ -63,9 +63,9 @@ public static class GameManager {
                 break;
         }
 
-        playerPositions.Clear();
-        playerPositions.AddRange(cards);
-        playerPositions.Sort(SortByScore);
+        if (playerPositions.Count == 6) {
+            playerPositions.Sort(SortByScore);
+        }
     }
 
         public static void SetSpeed(int generation, float speed){
@@ -97,7 +97,13 @@ public static class GameManager {
     }
 
     static int GetIndexOfPosition(Card card){
-        return playerPositions.IndexOf(card);
+        if (playerPositions.IndexOf(card) < 0) {
+            Debug.LogError("ERROR");
+            return -1;
+        } else {
+            return playerPositions.IndexOf(card);
+        }
+
     }
 
     static int SortByScore( Card c1, Card c2 ){
@@ -107,16 +113,40 @@ public static class GameManager {
     public static Vector3 GetTargetPosition(int generation){
         switch (generation){
             case 2018:
+                if (cards[0] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[0]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[0])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[0])];
             case 2017:
+                if (cards[1] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[1]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[1])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[1])];
             case 2016:
+                if (cards[2] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[2]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[2])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[2])];
             case 2015:
+                if (cards[3] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[3]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[3])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[3])];
             case 2014:
+                if (cards[4] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[4]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[4])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[4])];
             case 0:
+                if (cards[5] == null) return Vector3.zero;
+                if (GetIndexOfPosition(cards[5]) == -1) return Vector3.zero;
+                if (CardPositions.positions[GetIndexOfPosition(cards[5])] == null) return Vector3.zero;
+
                 return CardPositions.positions[GetIndexOfPosition(cards[5])];
             default:
                 Debug.LogError("Not a known generation: " + generation);

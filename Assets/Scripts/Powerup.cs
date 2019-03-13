@@ -8,18 +8,18 @@ public class Powerup : MonoBehaviour
     bool eventStarted = false;
 
     public Text type;
-    string Type = "type";
+    string TypeString = "type";
 
     public Text year;
     string Year = "S18";
 
     public Text succeed;
-    string Succeed = "S18";
+    string SucceedString = "S18";
     public Text typeActivated;
     string TypeActivated = "Type activated";
 
     public Text defeat;
-    string Defeat = "S18";
+    string DefeatString = "S18";
     public Text typeFailed;
     string TypeFailed = "Type failed";
 
@@ -37,23 +37,180 @@ public class Powerup : MonoBehaviour
     public float timeLeft = 120.0f;
     float timeMax;
     float loadTime = 0.5f;
+    
 
-    public Image beerMug;
     float loadBeer = 0.3f;
-
-    public Image sodaGlass;
     float loadSoda = 0.7f;
 
-    public Image bigBeerMug;
-    public Image bigSodaGlass;
+    private GameObject _smallBeer = null;
+    private string _smallBeerName;
 
-    public Transform smallBeerTransform, bigBeerTransform, smallSodaTransform, bigSodaTransform, typeTransform, timeProgressTransform, succeedTransform, defeatTransform;
 
-    
+    public GameObject SmallBeer {
+        get {
+            if (_smallBeer == null) {
+                _smallBeer = GameObject.Find(_smallBeerName);
+            }
+            return _smallBeer;
+        }
+        set {
+            _smallBeer = value;
+            _smallBeerName = value.name;
+        }
+    }
+
+    private GameObject _smallSoda = null;
+    private string _smallSodaName;
+
+    public GameObject SmallSoda {
+        get {
+            if (_smallSoda == null) {
+                _smallSoda = GameObject.Find(_smallSodaName);
+            }
+            return _smallSoda;
+        }
+        set {
+            _smallSoda = value;
+            _smallSodaName = value.name;
+        }
+    }
+
+    private GameObject _bigBeer = null;
+    private string _bigBeerName;
+
+    public GameObject BigBeer {
+        get {
+            if (_bigBeer == null) {
+                _bigBeer = GameObject.Find(_bigBeerName);
+            }
+            return _bigBeer;
+        }
+        set {
+            _bigBeer = value;
+            _bigBeerName = value.name;
+        }
+    }
+
+    private GameObject _bigSoda = null;
+    private string _bigSodaName;
+
+    public GameObject BigSoda {
+        get {
+            if (_bigSoda == null) {
+                _bigSoda = GameObject.Find(_bigSodaName);
+            }
+            return _bigSoda;
+        }
+        set {
+            _bigSoda = value;
+            _bigSodaName = value.name;
+        }
+    }
+
+    private GameObject _type = null;
+    private string _typeName;
+
+    public GameObject Type {
+        get {
+            if (_type == null) {
+                _type = GameObject.Find(_typeName);
+            }
+            return _type;
+        }
+        set {
+            _type = value;
+            _typeName = value.name;
+        }
+    }
+
+    private GameObject _timeProgress = null;
+    private string _timeProgressName;
+
+    public GameObject TimeProgress {
+        get {
+            if (_timeProgress == null) {
+                _timeProgress = GameObject.Find(_timeProgressName);
+            }
+            return _timeProgress;
+        }
+        set {
+            _timeProgress = value;
+            _timeProgressName = value.name;
+        }
+    }
+
+    private GameObject _loadingBar = null;
+    private string _loadingBarName;
+
+    public GameObject LoadingBar {
+        get {
+            if (_timeProgress == null) {
+                _timeProgress = GameObject.Find(_timeProgressName);
+            }
+            return _timeProgress;
+        }
+        set {
+            _timeProgress = value;
+            _timeProgressName = value.name;
+        }
+    }
+
+    private GameObject _succeed = null;
+    private string _succeedName;
+
+    public GameObject Succeed {
+        get {
+            if (_succeed == null) {
+                _succeed = GameObject.Find(_succeedName);
+            }
+            return _succeed;
+        }
+        set {
+            _succeed = value;
+            _succeedName = value.name;
+        }
+    }
+
+    private GameObject _defeat = null;
+    private string _defeatName;
+
+    public GameObject Defeat {
+        get {
+            if (_defeat == null) {
+                _defeat = GameObject.Find(_defeatName);
+            }
+            return _defeat;
+        }
+        set {
+            _defeat = value;
+            _defeatName = value.name;
+        }
+    }
 
 
     // Start is called before the first frame update
     void Start() {
+
+        SmallBeer = GameObject.FindGameObjectWithTag("beer");
+        BigBeer = GameObject.FindGameObjectWithTag("bigbeer");
+        SmallSoda = GameObject.FindGameObjectWithTag("soda");
+        BigSoda = GameObject.FindGameObjectWithTag("bigsoda");
+        Type = GameObject.FindGameObjectWithTag("type");
+        TimeProgress = GameObject.FindGameObjectWithTag("time");
+        Defeat = GameObject.FindGameObjectWithTag("defeat");
+        Succeed = GameObject.FindGameObjectWithTag("succeed");
+
+        SmallBeer.SetActive(false);
+        BigBeer.SetActive(false);
+        SmallSoda.SetActive(false);
+        BigSoda.SetActive(false);
+        Type.SetActive(false);
+        TimeProgress.SetActive(false);
+        Succeed.SetActive(false);
+        Defeat.SetActive(false);
+
+
+
         GameManager.PowerupEvent -= StartEvent;
         GameManager.PowerupEvent += StartEvent;
 
@@ -68,7 +225,7 @@ public class Powerup : MonoBehaviour
     void Update()
     {
         if(eventStarted){
-            type.text = (Type);
+            type.text = (TypeString);
             year.text = (Year);
             beer.text = (BeerCurrent + "/" + BeerGoal);
             soda.text = (SodaCurrent + "/" + SodaGoal);
@@ -83,10 +240,10 @@ public class Powerup : MonoBehaviour
             this.timeLeft -= Time.deltaTime;
 
             time.fillAmount = timeLeft / timeMax;
-            beerMug.fillAmount = (loadBeer);
-            bigBeerMug.fillAmount = (loadBeer);
-            sodaGlass.fillAmount = (loadSoda);
-            bigSodaGlass.fillAmount = (loadSoda);
+            SmallBeer.GetComponent<Image>().fillAmount = (loadBeer);
+            BigBeer.GetComponent<Image>().fillAmount = (loadBeer);
+            SmallSoda.GetComponent<Image>().fillAmount = (loadSoda);
+            BigSoda.GetComponent<Image>().fillAmount = (loadSoda);
         }
     }
 
@@ -95,34 +252,34 @@ public class Powerup : MonoBehaviour
         this.timeLeft = timeGoal;
         this.BeerGoal = beerGoal;
         this.SodaGoal = sodaGoal;
-        this.Type = powerup;
+        this.TypeString = powerup;
         this.BeerCurrent = 0;
         this.SodaCurrent = 0;
         this.TypeActivated = powerup + " activated";
         this.TypeFailed = powerup + " failed";
 
-        typeTransform.gameObject.SetActive(true);
-        timeProgressTransform.gameObject.SetActive(true);
-        succeedTransform.gameObject.SetActive(false);
-        defeatTransform.gameObject.SetActive(false);
+        TimeProgress.SetActive(true);
+        Type.SetActive(true);
+        Succeed.SetActive(false);
+        Defeat.SetActive(false);
 
         if(sourceGen == 0){
             this.Year = "OLD";
-            this.Succeed = "OLD";
-            this.Defeat = "OLD";
+            this.SucceedString = "OLD";
+            this.DefeatString = "OLD";
         } else{
             this.Year = "S" + sourceGen.ToString().Substring(2);
-            this.Succeed = "S" + sourceGen.ToString().Substring(2);
-            this.Defeat = "S" + sourceGen.ToString().Substring(2);
+            this.SucceedString = "S" + sourceGen.ToString().Substring(2);
+            this.DefeatString = "S" + sourceGen.ToString().Substring(2);
         }
 
         if (BeerGoal == 0) {
-            bigSodaTransform.gameObject.SetActive(true);
+            BigSoda.SetActive(true);
         } else if (SodaGoal == 0) {
-            bigBeerTransform.gameObject.SetActive(true);
+            BigBeer.SetActive(true);
         } else {
-            smallSodaTransform.gameObject.SetActive(true);
-            smallBeerTransform.gameObject.SetActive(true);
+            SmallSoda.SetActive(true);
+            SmallBeer.SetActive(true);
         }
 
         eventStarted = true;
@@ -134,17 +291,17 @@ public class Powerup : MonoBehaviour
     }
 
     void FinalEvent (bool completed) {
-        typeTransform.gameObject.SetActive(false);
-        timeProgressTransform.gameObject.SetActive(false);
-        bigSodaTransform.gameObject.SetActive(false);
-        bigBeerTransform.gameObject.SetActive(false);
-        smallSodaTransform.gameObject.SetActive(false);
-        smallBeerTransform.gameObject.SetActive(false);
+        Type.SetActive(false);
+        TimeProgress.SetActive(false);
+        BigSoda.SetActive(false);
+        BigBeer.SetActive(false);
+        SmallSoda.SetActive(false);
+        SmallBeer.SetActive(false);
 
         if (completed == true) {
-            succeedTransform.gameObject.SetActive(true);
+            Succeed.SetActive(true);
         } else {
-            defeatTransform.gameObject.SetActive(true);
+            Defeat.SetActive(true);
         }
 
         eventStarted = false;

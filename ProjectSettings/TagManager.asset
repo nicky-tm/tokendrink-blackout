@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - succeed
+  - defeat
+  - time
+  - type
+  - beer
+  - soda
+  - bigbeer
+  - bigsoda
   layers:
   - Default
   - TransparentFX

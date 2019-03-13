@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\20173721\\Documents\\Bachelor Industrial Design\\Difficult things\\Token drink 2018-2019\\Tokendrink Blackout\\Assembly-CSharp.csproj",
+  "TargetFramework": "v4.7.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

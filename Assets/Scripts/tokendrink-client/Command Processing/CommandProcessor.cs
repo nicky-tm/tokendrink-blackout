@@ -45,6 +45,9 @@ public static class CommandProcessor
             case "play_sound":
                 ProcessData(ToDataType<PlayAudioData>(JSON));
                 break;
+            case "member_count":
+                ProcessData(ToDataType<MemberCountData>(JSON));
+                break;
             default:
                 Debug.LogError("Couldn't process type: " + commonData.type);
                 break;
@@ -97,7 +100,13 @@ public static class CommandProcessor
         }
         else if (data is GameWinnerData gameWinnerData){
             ThreadHelper.ExecuteInUpdate(() => {
+                if(gameWinnerData.type == "winner"){
+                    GameManager.FinalBlackoutEvent(gameWinnerData.value);
+                }
+    
+                Debug.LogWarning("HELLO");
                 GameManager.AudioEvent(gameWinnerData.value.ToString());
+                GameManager.WinnerEvent(gameWinnerData.value);
             });
         }
         else if (data is MemberCountData memberCountData)

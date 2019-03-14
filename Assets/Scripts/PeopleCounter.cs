@@ -4,15 +4,19 @@ using UnityEngine.UI;
 
 public class PeopleCounter : MonoBehaviour
 {
-    public int countPlus = 0;
     public Text count;
+    string Count = "0";
 
-    void Update()
-    {
-        count.text = (countPlus.ToString());
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            countPlus++;
-        }
+    void Start() {
+        GameManager.MemberCount -= CountEvent;
+        GameManager.MemberCount += CountEvent;
+    }
+
+    void Update() {
+        count.text = (Count);
+    }
+    
+    void CountEvent(int value) {
+        this.Count = value.ToString();
     }
 }

@@ -9,6 +9,6 @@ public class GameWinnerData {
     public string type;
 
     // generation
-    public string value;
+    public int value;
 
 }

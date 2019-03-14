@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameManager {
+public static class GameManager
+{
 
     static Card[] cards = new Card[6];
     public static List<Card> playerPositions = new List<Card>();
     public static string round = "empty";
+
+    public static bool finalBlackoutBool = false;
 
     public delegate void powerupEvent(string powerup, int sourceGen, int targetGen, int timeGoal, int beerGoal, int sodaGoal);
     public static event powerupEvent PowerupEvent;
@@ -26,28 +29,49 @@ public static class GameManager {
     public delegate void memberCount(int value);
     public static event memberCount MemberCount;
 
+    public delegate void gameWinner(int value);
+    public static event gameWinner GameWinner;
+
+    public delegate void finalBlackout(int value);
+    public static event finalBlackout FinalBlackout;
+
     public delegate void playAudio(string value);
     public static event playAudio PlayAudio;
 
-    static float highestSpeed;
-    public static float HighestSpeed {get{
-        if (highestSpeed <= 0) return 1f;
-        else return highestSpeed;
-    }}
+    public delegate void resetPowerup();
+    public static event resetPowerup ResetPowerup;
 
-    public static void AddCard(int i, Card card){
+    public static SwitchScenes.SCENE currentScene;
+
+    static float highestSpeed;
+    public static float HighestSpeed
+    {
+        get
+        {
+            if (highestSpeed <= 0) return 1f;
+            else return highestSpeed;
+        }
+    }
+
+    public static void AddCard(int i, Card card)
+    {
         cards[i] = card;
 
         playerPositions.Clear();
         playerPositions.AddRange(cards);
     }
 
-    public static void SetRound(string value){
+    public static void SetRound(string value)
+    {
         round = value;
     }
 
-    public static void SetProgress(int generation, float progress){
-        switch (generation){
+    public static void SetProgress(int generation, float progress)
+    {
+        if (currentScene != SwitchScenes.SCENE.SCORE) return;
+
+        switch (generation)
+        {
             case 2018:
                 cards[0].progress = progress;
                 break;
@@ -71,13 +95,17 @@ public static class GameManager {
                 break;
         }
 
-        if (playerPositions.Count == 6) {
+        if (playerPositions.Count == 6)
+        {
             playerPositions.Sort(SortByScore);
         }
     }
 
-        public static void SetSpeed(int generation, float speed){
-        switch (generation){
+    public static void SetSpeed(int generation, float speed)
+    {
+        if (currentScene != SwitchScenes.SCENE.SCORE) return;
+        switch (generation)
+        {
             case 2018:
                 cards[0].speed = speed;
                 break;
@@ -104,22 +132,29 @@ public static class GameManager {
         ResetSpeed();
     }
 
-    static int GetIndexOfPosition(Card card){
-        if (playerPositions.IndexOf(card) < 0) {
+    static int GetIndexOfPosition(Card card)
+    {
+        if (playerPositions.IndexOf(card) < 0)
+        {
             Debug.LogError("ERROR");
             return -1;
-        } else {
+        }
+        else
+        {
             return playerPositions.IndexOf(card);
         }
 
     }
 
-    static int SortByScore( Card c1, Card c2 ){
+    static int SortByScore(Card c1, Card c2)
+    {
         return c2.progress.CompareTo(c1.progress);
     }
 
-    public static Vector3 GetTargetPosition(int generation){
-        switch (generation){
+    public static Vector3 GetTargetPosition(int generation)
+    {
+        switch (generation)
+        {
             case 2018:
                 if (cards[0] == null) return Vector3.zero;
                 if (GetIndexOfPosition(cards[0]) == -1) return Vector3.zero;
@@ -162,46 +197,74 @@ public static class GameManager {
         }
     }
 
-    static void ResetSpeed(){
-            highestSpeed = 1f;
-            for(int i = 0; i < cards.Length; i++){
-                if(cards[i].speed > highestSpeed){
-                    highestSpeed = cards[i].speed;
-                }
+    static void ResetSpeed()
+    {
+        highestSpeed = 1f;
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (cards[i].speed > highestSpeed)
+            {
+                highestSpeed = cards[i].speed;
             }
+        }
     }
 
-    public static void StartEvent(string powerup, int sourceGen, int targetGen, int timeGoal, int beerGoal, int sodaGoal){
+    public static void StartEvent(string powerup, int sourceGen, int targetGen, int timeGoal, int beerGoal, int sodaGoal)
+    {
+        if (PowerupEvent == null) return;
         PowerupEvent(powerup, sourceGen, targetGen, timeGoal, beerGoal, sodaGoal);
     }
 
-    public static void DuringEvent(int beers, int sodas){
+    public static void DuringEvent(int beers, int sodas)
+    {
         PowerupDuring(beers, sodas);
     }
 
-    public static void LoadData(string value){
+    public static void LoadData(string value)
+    {
         LoadingData(value);
         round = value;
     }
 
-    public static void FinalEvent(bool completed) {
+    public static void FinalEvent(bool completed)
+    {
+        if (PowerupFinal == null) return;
         PowerupFinal(completed);
     }
 
-    public static void TriggerEvent(string value) {
+    public static void TriggerEvent(string value)
+    {
         TriggerContinent(value);
 
-        if (round == "europe"){
+        if (round == "europe")
+        {
+            round = "empty";
             PlayAudio("startEurope");
         }
     }
 
-    public static void CountEvent(int value) {
+    public static void CountEvent(int value)
+    {
         MemberCount(value);
     }
 
-    public static void AudioEvent(string value) {
+    public static void WinnerEvent(int value) {
+        GameWinner(value);
+    }
+
+    public static void FinalBlackoutEvent(int year){
+        FinalBlackout(year);
+    }
+
+    public static void AudioEvent(string value)
+    {
         PlayAudio(value);
+    }
+
+    public static void ResetPowerupHelper(){
+        if (ResetPowerup == null) return;
+        
+        ResetPowerup();
     }
 
 }

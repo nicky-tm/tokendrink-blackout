@@ -23,6 +23,9 @@ public class VideoScript : MonoBehaviour
 
     void AudioEvent(string value)
     {
+
+        Debug.LogWarning("Hireo: " + value);
+
         switch(value){
             case "startEurope":
                 stephan.clip = clips[0];
@@ -33,8 +36,11 @@ public class VideoScript : MonoBehaviour
             case "2":
                 stephan.clip = clips[57];
                 break;
+            case "3":
+                stephan.clip = clips[59];
+                GameManager.finalBlackoutBool = true;
+                break;
         }
-
         if (GameManager.round.ToLower() == "europe")
         {
             switch (value)
@@ -185,30 +191,30 @@ public class VideoScript : MonoBehaviour
             }
         }
 
-        if (GameManager.round.ToLower() == "antarctica")
-        {
-            switch (value)
-            {
-                case "0":
-                    stephan.clip = clips[37];
-                    break;
-                case "2014":
-                    stephan.clip = clips[38];
-                    break;
-                case "2015":
-                    stephan.clip = clips[39];
-                    break;
-                case "2016":
-                    stephan.clip = clips[40];
-                    break;
-                case "2017":
-                    stephan.clip = clips[41];
-                    break;
-                case "2018":
-                    stephan.clip = clips[42];
-                    break;
-            }
-        }
+        // if (GameManager.round.ToLower() == "antarctica")
+        // {
+        //     switch (value)
+        //     {
+        //         case "0":
+        //             stephan.clip = clips[37];
+        //             break;
+        //         case "2014":
+        //             stephan.clip = clips[38];
+        //             break;
+        //         case "2015":
+        //             stephan.clip = clips[39];
+        //             break;
+        //         case "2016":
+        //             stephan.clip = clips[40];
+        //             break;
+        //         case "2017":
+        //             stephan.clip = clips[41];
+        //             break;
+        //         case "2018":
+        //             stephan.clip = clips[42];
+        //             break;
+        //     }
+        // }
 
         switch (value) {
             case "s13":
